@@ -16,23 +16,23 @@ def better_print(json_str):
 
 def request_method():
     response = requests.get(build_uri('user/emails'), auth=('imoocdemo', 'imoocdemo123'))
-    print better_print(response.text)
+    print(better_print(response.text))
 
 
 def params_request():
     response = requests.get(build_uri('users'), params={'since': 11})
-    print better_print(response.text)
-    print response.request.headers
-    print response.url
+    print(better_print(response.text))
+    print(response.request.headers)
+    print(response.url)
 
 
 def json_request():
     # response = requests.patch(build_uri('user'), auth=('imoocdemo', 'imoocdemo123'), json={'name': 'babymooc2', 'email': 'hello-world@imooc.org'})
     response = requests.post(build_uri('user/emails'), auth=('imoocdemo', 'imoocdemo123'), json=['helloworld@github.com'])
-    print better_print(response.text)
-    print response.request.headers
-    print response.request.body
-    print response.status_code
+    print(better_print(response.text))
+    print(response.request.headers)
+    print(response.request.body)
+    print(response.status_code)
 
 
 def timeout_request():
@@ -40,12 +40,12 @@ def timeout_request():
         response = requests.get(build_uri('user/emails'), timeout=10)
         response.raise_for_status()
     except exceptions.Timeout as e:
-        print e.message
+        print(e.message)
     except exceptions.HTTPError as e:
-        print e.message
+        print(e.message)
     else:
-        print response.text
-        print response.status_code
+        print(response.text)
+        print(response.status_code)
 
 
 def hard_requests():
@@ -54,13 +54,13 @@ def hard_requests():
     headers = {'User-Agent': 'fake1.3.4'}
     req = Request('GET', build_uri('user/emails'), auth=('imoocdemo', 'imoocdemo123'), headers=headers)
     prepped = req.prepare()
-    print prepped.body
-    print prepped.headers
+    print(prepped.body)
+    print(prepped.headers)
 
     resp = s.send(prepped, timeout=5)
-    print resp.status_code
-    print resp.request.headers
-    print resp.text
+    print(resp.status_code)
+    print(resp.request.headers)
+    print(resp.text)
 
 if __name__ == '__main__':
     hard_requests()
